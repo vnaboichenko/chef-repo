@@ -11,12 +11,24 @@
 repo_name = "chef-repo"
 repo_url  = "git@github.com:vnaboychenko/chef-repo.git"
 revision  = "ccpdev"
-checkout_branch = revision
+
+#if /\A(([0-9a-f]{40})|([0-9a-f]{6,8}))\z/.match("#{revision}")
+#    branch_name = "deploy"
+#  else 
+#    branch_name = revision
+#end
+
 
 git "/tmp/#{repo_name}" do
   repository repo_url
-  checkout_branch checkout_branch
+#  checkout_branch branch_name
   revision revision
   action :sync
+end
+
+execute "upload roles" do
+  cwd "/tmp/#{repo_name}"
+  command "knife upload roles"
+  action :nothing
 end
 
