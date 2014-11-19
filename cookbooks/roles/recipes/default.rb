@@ -10,11 +10,12 @@
 
 repo_name = "chef-repo"
 repo_url  = "git@github.com:vnaboychenko/chef-repo.git"
-revison   = "ccpdev"
-
+revision  = "ccpdev"
+checkout_branch = revision
 
 git "/tmp/#{repo_name}" do
   repository repo_url
+  checkout_branch checkout_branch
   revision revision
   action :sync
 end
