@@ -8,9 +8,14 @@
 #
 
 
-git "/tmp/chef-repo" do
-  repository "git@github.com:vnaboychenko/chef-repo.git"
-  revision "29bf57026377d5f18dc5605cc3cdf2cdeb911cfa"
+repo_name = "chef-repo"
+repo_url  = "git@github.com:vnaboychenko/chef-repo.git"
+revison   = "ccpdev"
+
+
+git "/tmp/#{repo_name}" do
+  repository repo_url
+  revision revision
   action :sync
 end
 
