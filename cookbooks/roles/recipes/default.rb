@@ -23,12 +23,13 @@ git "/tmp/#{repo_name}" do
   repository repo_url
 #  checkout_branch branch_name
   revision revision
+  notifies :run, 'execute[upload roles]', :immediately
   action :sync
 end
 
 execute "upload roles" do
   cwd "/tmp/#{repo_name}"
-  command "knife upload roles"
+  command "knife upload roles --chef-repo-path /tmp/#{repo_name}"
   action :nothing
 end
 
